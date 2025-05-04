@@ -1,0 +1,13 @@
+# Ignorer les environnements virtuels
+env/
+venv/
+
+# Ignorer les fichiers Python compilés
+__pycache__/
+*.py[cod]
+
+# Ignorer les fichiers de config personnels
+*.env
+
+# Ignorer les fichiers de base MongoDB exportés
+dump/

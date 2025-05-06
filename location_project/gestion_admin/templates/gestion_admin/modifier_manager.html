@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier un Manager</title>
+  <link href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-size: cover;
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      font-family: 'Fjalla One', sans-serif;
+    }
+
+    .contact-us {
+      background: #d2e7e9;
+      padding: 50px 100px;
+      border: 2px solid rgba(0, 0, 0, 1);
+      box-shadow: 15px 15px 1px #327c83, 15px 15px 1px 2px rgba(0, 0, 0, 1);
+    }
+
+    .contact-us h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #2A293E;
+    }
+
+    form input {
+      display: block;
+      width: 100%;
+      font-size: 14pt;
+      line-height: 28pt;
+      margin-bottom: 28pt;
+      border: none;
+      border-bottom: 5px solid rgba(0,0,0,1);
+      background: #d2e7e9;
+      min-width: 250px;
+      padding-left: 5px;
+      outline: none;
+      color: rgba(0,0,0,1);
+    }
+
+    form input:focus {
+      border-bottom: 5px solid #327c83;
+    }
+
+    button {
+      display: block;
+      margin: 0 auto;
+      line-height: 28pt;
+      padding: 0 20px;
+      background: #327c83;
+      letter-spacing: 2px;
+      transition: .2s all ease-in-out;
+      outline: none;
+      border: 1px solid rgba(0, 0, 0, 1);
+      box-shadow: 3px 3px 1px 1px #80cad0, 3px 3px 1px 2px rgba(0,0,0,1);
+      font-size: 14pt;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+        background: #327c83;
+      color: white;
+      border: 1px solid rgba(0,0,0,1);
+    }
+
+    ::selection {
+      background: #327c83;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="contact-us">
+    <h2>Modifier un Manager</h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="nom" placeholder="Nom" value="{{ manager.nom|default_if_none:'' }}" required>
+      <input type="text" name="prenom" placeholder="Prénom" value="{{ manager.prenom|default_if_none:'' }}" required>
+      <input type="email" name="email" placeholder="Email" value="{{ manager.email|default_if_none:'' }}" required>
+      <input type="text" name="telephone" placeholder="Téléphone" value="{{ manager.telephone|default_if_none:'' }}">
+      <input type="text" name="agence" placeholder="Agence" value="{{ manager.agence|default_if_none:'' }}">
+      <button type="submit">MODIFIER</button>
+    </form>
+  </div>
+</body>
+</html>

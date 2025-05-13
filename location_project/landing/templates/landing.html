@@ -943,7 +943,7 @@ header {
                 <li class="nav-item"><a href="#voitures" class="nav-link clr-transition">Voitures</a></li>
                 <li class="nav-item"><a href="#about" class="nav-link clr-transition">À propos</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link clr-transition">Contact</a></li>
-                <li class="nav-item"><a href="#login" class="nav-link clr-transition">Connexion</a></li>
+                <li class="nav-item"><a href="/login/" class="nav-link clr-transition">Connexion</a></li>
             </ul>
             <div class="social-links">
                
@@ -1059,14 +1059,16 @@ header {
                     <button class="role-btn">Manager</button>
                     <button class="role-btn">Administrateur</button>
                 </div>
-                <form>
+                <form method="POST" action="{% url 'login_view' %}">
+                  {% csrf_token %}
+                    <input type="text" name="role" id="role" value="client">
                     <div class="form-control">
                         <label for="login-email" class="form-label">Email</label>
-                        <input type="email" id="login-email" class="normal-input all-input" required>
+                        <input type="email" name="email" id="login-email" class="normal-input all-input" required>
                     </div>
                     <div class="form-control">
                         <label for="login-password" class="form-label">Mot de passe</label>
-                        <input type="password" id="login-password" class="normal-input all-input" required>
+                        <input type="password" name="password" id="login-password" class="normal-input all-input" required>
                     </div>
                     <button type="submit" class="button login-btn rent-now-btn">Se connecter</button>
                 </form>
@@ -1114,6 +1116,19 @@ header {
         </div>
     </footer>
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+      const buttons = document.querySelectorAll('.role-btn');
+      const roleInput = document.getElementById('role');
+  
+      buttons.forEach(btn => {
+          btn.addEventListener('click', function(e) {
+              e.preventDefault();
+              buttons.forEach(b => b.classList.remove('active'));
+              this.classList.add('active');
+              roleInput.value = this.textContent.toLowerCase();
+          });
+      });
+  </script>
     <script>
         /* ----- BASE ------ */
 "use strict";

@@ -1,4 +1,6 @@
 from mongoengine import Document, StringField, EmailField, ReferenceField, DateTimeField
+from landing.models_nosql import Manager 
+
 
 class Client(Document):
     nom = StringField(required=True)
@@ -8,22 +10,17 @@ class Client(Document):
 
     meta = {'collection': 'clients'}
 
+
+
 class Voiture(Document):
     marque = StringField(required=True)
     modele = StringField(required=True)
     immatriculation = StringField(required=True, unique=True)
     statut = StringField(choices=('disponible', 'indisponible'), default='disponible')
-
+    manager = ReferenceField(Manager)
     meta = {'collection': 'voitures'}
 
-class Manager(Document):
-    nom = StringField(required=True)
-    prenom = StringField(required=True)
-    email = EmailField(required=True, unique=True)
-    telephone = StringField()
-    agence = StringField()
 
-    meta = {'collection': 'managers'}
 
 class Reservation(Document):
     client = ReferenceField(Client, required=True)

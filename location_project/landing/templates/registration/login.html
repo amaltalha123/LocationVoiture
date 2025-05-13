@@ -1,0 +1,127 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental - Connexion</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        /* Style spécifique pour la navbar */
+        nav {
+            position: fixed; /* Rend la navbar fixe en haut */
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px 0;
+            z-index: 1000; /* Assure que la navbar est au-dessus des autres éléments */
+        }
+
+        .logo {
+            color: #e78f38;
+            font-size: 30px;
+            font-weight: bolder;
+            transition: .3s;
+        }
+
+        .logo:hover {
+            transform: translateX(20px);
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            font-size: 15px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        nav ul li a:hover {
+            color: #e78f38;
+            border-bottom: 2px solid #e78f38;
+        }
+
+        nav button {
+            background: #e78f38;
+            border: none;
+            color: #fff;
+            padding: 12px 35px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 2rem;
+            transition: .3s;
+        }
+
+        nav button:hover {
+            scale: .8;
+        }
+
+        /* Ajout pour éviter que le contenu soit caché sous la navbar */
+        body {
+            padding-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">RENT-CAR</a>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Reviews</a></li>
+            <li><a href="#">Blog</a></li>
+        </ul>
+    </nav>
+
+    <div class="login-container">
+        <div class="logo">
+            <h1>CAR<span>RENTAL</span></h1>
+        </div>
+        <form method="post" class="login-form" action="{% url 'landing:login_view' %}">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="{{ form.role.id_for_label }}">Rôle</label>
+                {{ form.role }}
+            </div>  
+            <div class="input-group">
+                <label for="{{ form.username.id_for_label }}">Email</label>
+                {{ form.username }}
+            </div>
+            <div class="input-group">
+                <label for="{{ form.password.id_for_label }}">Mot de passe</label>
+                {{ form.password }}
+            </div>
+            <button type="submit" class="login-btn">Connexion</button>
+        </form>
+    </div>
+
+    <div class="car-animation">
+        <div class="car"></div>
+    </div>
+</div>
+
+</html>

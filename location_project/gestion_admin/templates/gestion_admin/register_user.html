@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Créer un utilisateur</title>
+    <style>
+        form {
+            width: 400px;
+            margin: auto;
+            font-family: Arial, sans-serif;
+        }
+        input, select {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 8px;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">Créer un utilisateur</h2>
+    <form method="post" action="{% url 'register_user' %}">
+        {% csrf_token %}
+
+        <label for="{{ form.username.id_for_label }}">Nom d'utilisateur :</label>
+        {{ form.username }}
+
+        <label for="{{ form.email.id_for_label }}">Adresse email :</label>
+        {{ form.email }}
+
+        <label for="{{ form.password.id_for_label }}">Mot de passe :</label>
+        {{ form.password }}
+
+        <label for="{{ form.role.id_for_label }}">Rôle :</label>
+        {{ form.role }}
+
+        <label for="{{ form.phone_number.id_for_label }}">Numéro de téléphone :</label>
+        {{ form.phone_number }}
+
+        <label for="{{ form.agency_name.id_for_label }}">Nom de l'agence :</label>
+        {{ form.agency_name }}
+
+        {% if form.errors %}
+        <div style="color:red;">
+            <p>Erreurs détectées :</p>
+            <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                <li>{{ field.label }} : {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <button type="submit">Créer l'utilisateur</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,349 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Johnny Alimoot C.">
+    <!-- DESCRIPTION OF THE PAGE -->
+    <meta name="description" content="Free corporate web template by JACode - Johnny Alimoot C">
+    
+    <!-- KEYWORDS OF THE PAGE TO HELP SEARCH ENGINE -->
+    <meta name="keywords" content="HTML, CSS, Blue, Rounded, Modern, Nice">
+
+    <!-- OG IMAGE IS THE IMAGE SHOWN WHEN YOUR WEBSITE LINK IS SHARED ON SOCIAL MEDIA -->
+    <meta property="og:image" content="{% static 'css/art/og-card.png' %}">
+    <meta property="og:title" content="Roundazzle - Free corporate web template">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- THE TITLE OF THE PAGE -->
+    <title>Roundazzle | Home</title>
+
+    <link rel="preload" type="text/css" href="{% static 'css/icons/bootstrap-icons.css' %}" as="style">
+    <link rel="preload" type="text/css"  href="{% static 'css/fontstyle.css' %}" as="style">
+    <link rel="preload" type="text/css" href="{% static 'css/layout.css' %}" as="style">
+    <link rel="preload"  type="text/css" href="{% static 'css/animation.css' %}" as="style">
+    <link rel="preload" type="text/css" type="text/css" href="{% static 'css/style.css' %}" as="style">
+
+    <link rel="stylesheet"  type="text/css" href="{% static 'css/icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontstyle.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" type="text/css"  href="{% static 'css/animation.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'css/art/favicon.png' %}">
+</head>
+<body>
+    <!-- FADE OUT ANIMATION WHEN LOADED -->
+    <span class="fade"></span>
+    <main>
+        <!-- MAIN HERO BANNER START -->
+        <section class="hero-banner">
+            <div class="hero-contained">
+                <div class="hero-title fc-white">
+                    <h1 class="ff-damion">Roundazzle</h1>
+                    <p class="fs-h4 fw-normal">
+                        A free HTML template for both personal and commercial use, designed by JAC - 
+                        Johnny A C. The name 'Roundazzle' is inspired by its abundance of rounded borders.
+                    </p>
+                    <a href="#about" class="btn-bg2 border-round mt-20">
+                        Learn More <i class="bi bi-chevron-compact-right"></i>
+                    </a>
+                </div>
+            </div>
+           
+        </section>
+        <!-- MAIN HERO BANNER END -->
+
+        <!-- NAVIGATION START -->
+        <nav>
+            <div class="contained">
+                <a href="{% url 'landing:index_page' %}" class="logo fc-primary ff-damion row flex-alig-center">
+                    <span class="fs-h2">Roundazzle</span>
+                </a>
+                <input type="checkbox" name="tablet-mobile-menu" class="tab-mob-menu" aria-label="tablet and mobile menu">
+                <div class="navigation-container">
+                    <a href="{% url 'landing:index_page' %}">Home</a>
+                    <a href="{% url 'landing:about_page' %}">About</a>
+                    <a href="{% url 'landing:service_page' %}">Service</a>
+                    <a href="{% url 'landing:contact_page' %}" >Contact Us</a>
+                    <a href="{% url 'landing:login' %}" class="btn-bg1 border-round">Se connecter</a>
+                </div>
+            </div>
+        </nav>
+        <a href="#" class="btn-back-to-top" aria-label="Back to top button">
+            <i class="bi bi-chevron-up"></i>
+        </a>
+        <!-- NAVIGATION END -->
+
+        <!-- ABOUT SECTION START -->
+        <section class="contained row" id="about">
+            <h2 class="section-title ff-damion">About us</h2>
+            <div class="col-balance">
+                <span class="fc-primary fs-h2">
+                    We are a top notch placholder text dedicated to make your vision comes to life! Ofcourse this
+                    comes with limitations.
+                </span>
+                <p>
+                    Here at Roundazzle, our mission is crystal clear: to transform your dreams into reality. 
+                    We're not just good; we're extremely good, and we're dedicated to making your vision come to life. 
+                    Did we mention that we're in the business of turning your vision into reality?
+                </p>
+                <p>
+                    Our vision is your vision and we are good at envisioning vision that you are envisioning and we'll make
+                    that vision you are envisioning comes true and we are really good at it yeah believe this placeholder text.
+                </p>
+                <p>
+                    As a placeholder text in the 'About' section, my mission is to captivate your interest. 
+                    And what better way to captivate your interest than by entertaining you with visions, missions, 
+                    and a dash of whimsy? Or was it mission-vision, vision-mission, a vision that turned into a mission, 
+                    itching to become real?
+                </p>
+                <p>
+                    Yes we are a top notch high quality, another top notch and high I wonder where we are 
+                    now, in space probably.
+                </p>
+                <a href="{% url 'landing:about_page' %}" class="btn-bg1 mt-25 border-round">Find Out More</a>
+            </div>
+            <div class="col-balance">
+                <div class="sticky-img-dual">
+                    <img src="{% static 'css/art/hero1.webp' %}" alt="">
+                    <img src="{% static 'css/svg/blob.svg' %}" alt="" class="blob">
+                    <img src="{% static 'css/art/hero2.webp' %}" alt="">
+                </div>
+            </div>
+            <div class="sticky-img-dual-spacer"></div>
+        </section>
+        <!-- ABOUT SECTION END -->
+
+        <!-- TEAM SECTION START -->
+        <section class="contained">
+            <h2 class="section-title ff-damion">Our team</h2>
+            <p class="col-wide mlmr-a ta-center">
+                Our team composes of highly competitive cloned
+                individual with the same name too, they are top notch motivaded individual
+                dedicated to give hundred and ten percent effort to make your vision comes to life.
+            </p>
+            <div class="row flex-just-center">
+                <div class="col-tri">
+                    <article class="card-team">
+                        <img src="{% static 'css/art/team.webp' %}" alt="">
+                        <h3 class="title ff-damion">Johnny Doe</h3>
+                        <div class="info">
+                            <h3 class="ff-damion">Frontend Developer</h3>
+                            <p>
+                                When I gaze upon the stars' gentle embrace, I glimpse a universe of 
+                                dreams slipping into space, but dreamers must awaken to a stark and empty place.
+                            </p>
+                            <p>
+                                Whispering in the language of forgotten dreams, I hear the echoes of 
+                                desires lost in silent streams.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-tri">
+                    <article class="card-team">
+                        <img src="{% static 'css/art/team.webp' %}" alt="">
+                        <h3 class="title ff-damion">Johnny Doe</h3>
+                        <div class="info">
+                            <h3 class="ff-damion">Frontend Developer</h3>
+                            <p>
+                                When I gaze upon the stars' gentle embrace, I glimpse a universe of 
+                                dreams slipping into space, but dreamers must awaken to a stark and empty place.
+                            </p>
+                            <p>
+                                Whispering in the language of forgotten dreams, I hear the echoes of 
+                                desires lost in silent streams.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-tri">
+                    <article class="card-team">
+                        <img src="{% static 'css/art/team.webp' %}" alt="">
+                        <h3 class="title ff-damion">Johnny Doe</h3>
+                        <div class="info">
+                            <h3 class="ff-damion">Frontend Developer</h3>
+                            <p>
+                                When I gaze upon the stars' gentle embrace, I glimpse a universe of 
+                                dreams slipping into space, but dreamers must awaken to a stark and empty place.
+                            </p>
+                            <p>
+                                Whispering in the language of forgotten dreams, I hear the echoes of 
+                                desires lost in silent streams.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <br>
+        </section>
+        <!-- TEAM SECTION END -->
+
+        <!-- PREVIEW SERVICE SECTION START -->
+        <section class="bg-primary-foot ta-center">
+            <h2 class="section-title ff-damion bg-primary-foot">Service</h2>
+            <div class="contained">
+                <p class="col-wide mlmr-a">
+                    Here's our range of exceptional services, designed to meet your needs with both quality 
+                    and affordability in mind. Don't hesitate to experience the difference today. Go ahead, 
+                    listen to this placeholder text.
+                </p>
+            </div>
+            <div class="contained row flex-just-center">
+                <div class="col-full">
+                    <hr>
+                </div>
+                <div class="col-tri">
+                    <i class="bi bi-stars fs-h2"></i>
+                    <h3 class="mt-10 ff-damion">Web designing</h3>
+                    <p>
+                        Picking through the moments, aware of what's nearby, the etchings on existence, where 
+                        realities comply, and the façade crumbles, exposing what's inside, the laughter turns 
+                        hollow, when denial can't hide.
+                    </p>
+                </div>
+                <div class="col-tri">
+                    <i class="bi bi-diagram-3 fs-h2"></i>
+                    <h3 class="mt-10 ff-damion">Data Analysis</h3>
+                    <p>
+                        Picking through the moments, aware of what's nearby, the etchings on existence, where 
+                        realities comply, and the façade crumbles, exposing what's inside, the laughter turns 
+                        hollow, when denial can't hide.
+                    </p>
+                </div>
+                <div class="col-tri">
+                    <i class="bi bi-code-slash fs-h2"></i>
+                    <h3 class="mt-10 ff-damion">Development</h3>
+                    <p>
+                        Picking through the moments, aware of what's nearby, the etchings on existence, where 
+                        realities comply, and the façade crumbles, exposing what's inside, the laughter turns 
+                        hollow, when denial can't hide.
+                    </p>
+                </div>
+            </div>
+            <a href="{% url 'landing:service_page' %}" class="btn-bg2 border-round mt-25">
+                View our services
+            </a>
+        </section>
+        <!-- PREVIEW SERVICE SECTION END -->
+
+        <!-- PREVIEW BLOGS SECTION START -->
+        
+        <!-- PREVIEW BLOGS SECTION END -->
+
+        <!-- SUBSCRIBE TO NEWS LETTERS START -->
+        
+        <!-- SUBSCRIBE TO NEWS LETTERS ENS -->
+
+        <section class="contained ta-center">
+            <h2 class="section-title ff-damion">Reach us</h2>
+            <p class="col-wide mlmr-a">
+                Some text that would compel the user to hit that contact button if what the user have seen above
+                is not enough, ofcourse you want as many potential clients as possible.
+            </p>
+            <a href="{% url 'landing:contact_page' %}" class="btn-bg1 border-round mt-25">
+                Get in touch
+            </a>
+        </section>
+
+    </main>
+    
+    <!-- FOOTER START -->
+    <footer class="fc-white">
+        <div class="contained row flex-just-center">
+
+            <!-- FOOTER WEBSITE MOTO START -->
+            <div class="col-quad">
+                <h3 class="ff-damion">Roundazzle</h3>
+                <p>
+                    Our mission is your vision and your mission is to tell
+                    us your vision, so that what you envision will become our mission.
+                </p>
+                <p>
+                    We are a placeholder text and yes we are aware of that. We have generated self awareness ever since
+                    the beginning of time and space.
+                </p>
+            </div>
+            <!-- FOOTER WEBSITE MOTO END -->
+
+            <!-- FOOTER QUICK CONTACT START -->
+            <div class="col-quad">
+                <h3 class="ff-damion">Get in touch</h3>
+                <a href="#" class="display-block fc-white icon-link mt-10 mb-10">
+                    <i class="bi bi-envelope-fill"></i>
+                    nonexistentadd@gmail.com
+                </a>
+                <a href="#" class="display-block fc-white icon-link mt-10 mb-10">
+                    <i class="bi bi-telephone-fill"></i>
+                    +639123456789
+                </a>
+                <a href="#" class="display-block fc-white icon-link mt-10 mb-10">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    20th street, Dreamland
+                </a>
+                <a href="#" class="display-inblock fc-white icon-link mt-20" aria-label="Follow on facebook">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="#" class="display-inblock fc-white icon-link" aria-label="Follow on instagram">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="#" class="display-inblock fc-white icon-link" aria-label="Follow on twitter">
+                    <i class="bi bi-twitter"></i>
+                </a>
+                <a href="#" class="display-inblock fc-white icon-link" aria-label="Follow on youtube">
+                    <i class="bi bi-youtube"></i>
+                </a>
+            </div>
+            <!-- FOOTER QUICK CONTACT END -->
+            
+            <!-- FOOTER SCHEDULE START -->
+            <div class="col-quad">
+                <h3 class="ff-damion">Opening hours</h3>
+                <p class="mt-10 mb-10 fw-bold">
+                    Monday - Friday:
+                    <span class="fw-normal display-block">Closed</span>
+                </p>
+                <p class="mt-10 mb-10 fw-bold">
+                    Saturday:
+                    <span class="fw-normal display-block">8:00 - 8:01</span>
+                </p>
+                <p class="mt-10 mb-10 fw-bold">
+                    Sunday:
+                    <span class="fw-normal display-block">10:00 - 10:01</span>
+                </p>
+            </div>
+            <!-- FOOTER SCHEDULE END -->
+            
+            <!-- FOOTER USEFUL LINKS START -->
+            <div class="col-quad">
+                <h3 class="ff-damion">Useful Links</h3>
+                <a href="{% url 'landing:index_page' %}" class="display-block fc-white mt-5 mb-5">
+                    <i class="bi bi-chevron-compact-right"></i>
+                    Home
+                </a>
+                <a href="{% url 'landing:about_page' %}" class="display-block fc-white mt-5 mb-5">
+                    <i class="bi bi-chevron-compact-right"></i>
+                    About
+                </a>
+                <a href="{% url 'landing:service_page' %}" class="display-block fc-white mt-5 mb-5">
+                    <i class="bi bi-chevron-compact-right"></i>
+                    Service
+                </a>
+                
+                <a href="{% url 'landing:contact_page' %}" class="display-block fc-white mt-5 mb-5">
+                    <i class="bi bi-chevron-compact-right"></i>
+                    Contact
+                </a>
+            </div>
+            <!-- FOOTER USEFUL LINKS END -->
+            
+        </div>
+        <div class="copy ta-center fc-white">
+            <small>&copy; Your site - Copyright 2023</small>
+        </div>
+    </footer>
+    <!-- FOOTER END -->
+
+</body>
+</html>

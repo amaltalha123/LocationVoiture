@@ -25,7 +25,7 @@
 </head>
 <body>
     <h2 style="text-align:center;">Créer un utilisateur</h2>
-    <form method="post" action="{% url 'register_user' %}">
+    <form method="post" action="{% url 'gestion_admin:register_user' %}">
         {% csrf_token %}
 
         <label for="{{ form.username.id_for_label }}">Nom d'utilisateur :</label>

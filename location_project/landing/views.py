@@ -11,6 +11,18 @@ from django.http import  HttpResponse
 def landing_page(request):
     return render(request, 'home.html')
 
+def index_page(request):
+    return render(request, 'index.html')
+
+def contact_page(request):
+    return render(request, 'contact.html')
+
+def service_page(request):
+    return render(request, 'service.html')
+
+def about_page(request):
+    return render(request, 'about.html')
+
 @login_required
 def Admin_page(request):
     if request.user.role != 'admin':

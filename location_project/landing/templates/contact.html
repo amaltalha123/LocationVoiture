@@ -17,7 +17,7 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <!-- THE TITLE OF THE PAGE -->
-    <title>Roundazzle | Contact</title>
+    <title>CityDrive | Contact</title>
 
     <link rel="preload" type="text/css" href="{% static 'css/icons/bootstrap-icons.css' %}" as="style">
     <link rel="preload" type="text/css"  href="{% static 'css/fontstyle.css' %}" as="style">
@@ -37,16 +37,16 @@
     <span class="fade"></span>
     <main>
         <!-- SUB HERO BANNER START -->
-        <section class="sub-hero-banner" style="background-image: url('art/hero2.webp');">
+        <section class="hero-banner">
             <div class="hero-contained">
                 <div class="hero-title fc-white">
-                    <h1 class="ff-damion">Roundazzle | Contact us</h1>
+                    <h1 class="ff-damion">CityDrive | Contactez-nous</h1>
                     <a href="{% url 'landing:index_page' %}" class="fc-white">
-                        Home
+                        Accueil
                     </a>
                     <i class="bi bi-chevron-right"></i>
                     <a href="#" class="fc-white">
-                        Contact Us
+                        Contactez-nous
                     </a>
                 </div>
             </div>
@@ -58,15 +58,15 @@
         <nav>
             <div class="contained">
                 <a href="{% url 'landing:index_page' %}" class="logo fc-primary ff-damion row flex-alig-center">
-                    <span class="fs-h2">Roundazzle</span>
+                    <span class="fs-h2">CityDrive</span>
                 </a>
                 <input type="checkbox" name="tablet-mobile-menu" class="tab-mob-menu" aria-label="tablet and mobile menu">
                 <div class="navigation-container">
-                    <a href="{% url 'landing:index_page' %}">Home</a>
-                    <a href="{% url 'landing:about_page' %}">About</a>
-                    <a href="{% url 'landing:service_page' %}">Service</a>
-                    <a href="{% url 'landing:contact_page' %}" >Contact Us</a>
-                    
+                    <a href="{% url 'landing:index_page' %}">Accueil</a>
+                    <a href="{% url 'landing:about_page' %}"> À propos</a>
+                    <a href="{% url 'landing:service_page' %}">Services</a>
+                    <a href="{% url 'landing:contact_page' %}" >Contact </a>
+                    <a href="{% url 'landing:login' %}" class="btn-bg1 border-round">Se connecter</a>
                 </div>
             </div>
         </nav>
@@ -79,99 +79,94 @@
     </main>
 
     <!-- FOOTER START -->
-    <footer class="fc-white">
+   <footer class="fc-white">
         <div class="contained row flex-just-center">
 
             <!-- FOOTER WEBSITE MOTO START -->
-            <div class="col-quad">
-                <h3 class="ff-damion">Roundazzle</h3>
-                <p>
-                    Our mission is your vision and your mission is to tell
-                    us your vision, so that what you envision will become our mission.
-                </p>
-                <p>
-                    We are a placeholder text and yes we are aware of that. We have generated self awareness ever since
-                    the beginning of time and space.
-                </p>
-            </div>
+           <div class="col-quad">
+            <h3 class="ff-damion">CityDrive</h3>
+            <p>
+                Chez CityDrive, notre mission est de rendre la location de voitures simple, rapide et fiable. 
+                Nous offrons une large gamme de véhicules pour répondre à tous vos besoins, que ce soit pour un week-end ou un long séjour.
+            </p>
+            <p>
+                Faites confiance à CityDrive pour une mobilité en toute liberté.
+            </p>
+        </div>
             <!-- FOOTER WEBSITE MOTO END -->
 
             <!-- FOOTER QUICK CONTACT START -->
             <div class="col-quad">
-                <h3 class="ff-damion">Get in touch</h3>
-                <a href="#" class="display-block fc-white icon-link mt-10 mb-10">
-                    <i class="bi bi-envelope-fill"></i>
-                    nonexistentadd@gmail.com
-                </a>
-                <a href="#" class="display-block fc-white icon-link mt-10 mb-10">
-                    <i class="bi bi-telephone-fill"></i>
-                    +639123456789
-                </a>
-                <a href="#" class="display-block fc-white icon-link mt-10 mb-10">
-                    <i class="bi bi-geo-alt-fill"></i>
-                    20th street, Dreamland
-                </a>
-                <a href="#" class="display-inblock fc-white icon-link mt-20" aria-label="Follow on facebook">
-                    <i class="bi bi-facebook"></i>
-                </a>
-                <a href="#" class="display-inblock fc-white icon-link" aria-label="Follow on instagram">
-                    <i class="bi bi-instagram"></i>
-                </a>
-                <a href="#" class="display-inblock fc-white icon-link" aria-label="Follow on twitter">
-                    <i class="bi bi-twitter"></i>
-                </a>
-                <a href="#" class="display-inblock fc-white icon-link" aria-label="Follow on youtube">
-                    <i class="bi bi-youtube"></i>
-                </a>
-            </div>
-            <!-- FOOTER QUICK CONTACT END -->
-            
-            <!-- FOOTER SCHEDULE START -->
-            <div class="col-quad">
-                <h3 class="ff-damion">Opening hours</h3>
-                <p class="mt-10 mb-10 fw-bold">
-                    Monday - Friday:
-                    <span class="fw-normal display-block">Closed</span>
-                </p>
-                <p class="mt-10 mb-10 fw-bold">
-                    Saturday:
-                    <span class="fw-normal display-block">8:00 - 8:01</span>
-                </p>
-                <p class="mt-10 mb-10 fw-bold">
-                    Sunday:
-                    <span class="fw-normal display-block">10:00 - 10:01</span>
-                </p>
-            </div>
-            <!-- FOOTER SCHEDULE END -->
-            
-            <!-- FOOTER USEFUL LINKS START -->
-            <div class="col-quad">
-                <h3 class="ff-damion">Useful Links</h3>
-                <a href="{% url 'landing:index_page' %}" class="display-block fc-white mt-5 mb-5">
-                    <i class="bi bi-chevron-compact-right"></i>
-                    Home
-                </a>
-                <a href="{% url 'landing:about_page' %}" class="display-block fc-white mt-5 mb-5">
-                    <i class="bi bi-chevron-compact-right"></i>
-                    About
-                </a>
-                <a href="{% url 'landing:service_page' %}" class="display-block fc-white mt-5 mb-5">
-                    <i class="bi bi-chevron-compact-right"></i>
-                    Service
-                </a>
-                
-                <a href="{% url 'landing:contact_page' %}" class="display-block fc-white mt-5 mb-5">
-                    <i class="bi bi-chevron-compact-right"></i>
-                    Contact
-                </a>
-            </div>
-            <!-- FOOTER USEFUL LINKS END -->
-            
+            <h3 class="ff-damion">Contact rapide</h3>
+            <a href="#" class="display-block fc-white icon-link mt-10 mb-10">
+                <i class="bi bi-envelope-fill"></i>
+                contact@citydrive.com
+            </a>
+            <a href="#" class="display-block fc-white icon-link mt-10 mb-10">
+                <i class="bi bi-telephone-fill"></i>
+                +212 6 12 34 56 78
+            </a>
+            <a href="#" class="display-block fc-white icon-link mt-10 mb-10">
+                <i class="bi bi-geo-alt-fill"></i>
+                123 Rue de la Mobilité, Casablanca, Maroc
+            </a>
+            <a href="#" class="display-inblock fc-white icon-link mt-20" aria-label="Suivez-nous sur Facebook">
+                <i class="bi bi-facebook"></i>
+            </a>
+            <a href="#" class="display-inblock fc-white icon-link" aria-label="Suivez-nous sur Instagram">
+                <i class="bi bi-instagram"></i>
+            </a>
+            <a href="#" class="display-inblock fc-white icon-link" aria-label="Suivez-nous sur Twitter">
+                <i class="bi bi-twitter"></i>
+            </a>
+            <a href="#" class="display-inblock fc-white icon-link" aria-label="Suivez-nous sur YouTube">
+                <i class="bi bi-youtube"></i>
+            </a>
         </div>
-        <div class="copy ta-center fc-white">
-            <small>&copy; Your site - Copyright 2023</small>
+
+        <!-- Horaires d'ouverture -->
+        <div class="col-quad">
+            <h3 class="ff-damion">Horaires d'ouverture</h3>
+            <p class="mt-10 mb-10 fw-bold">
+                Lundi - Vendredi :
+                <span class="fw-normal display-block">08:00 - 19:00</span>
+            </p>
+            <p class="mt-10 mb-10 fw-bold">
+                Samedi :
+                <span class="fw-normal display-block">09:00 - 14:00</span>
+            </p>
+            <p class="mt-10 mb-10 fw-bold">
+                Dimanche :
+                <span class="fw-normal display-block">Fermé</span>
+            </p>
         </div>
-    </footer>
+
+        <!-- Liens utiles -->
+        <div class="col-quad">
+            <h3 class="ff-damion">Liens utiles</h3>
+            <a href="{% url 'landing:index_page' %}" class="display-block fc-white mt-5 mb-5">
+                <i class="bi bi-chevron-compact-right"></i>
+                Accueil
+            </a>
+            <a href="{% url 'landing:about_page' %}" class="display-block fc-white mt-5 mb-5">
+                <i class="bi bi-chevron-compact-right"></i>
+                À propos
+            </a>
+            <a href="{% url 'landing:service_page' %}" class="display-block fc-white mt-5 mb-5">
+                <i class="bi bi-chevron-compact-right"></i>
+                Services
+            </a>
+            <a href="{% url 'landing:contact_page' %}" class="display-block fc-white mt-5 mb-5">
+                <i class="bi bi-chevron-compact-right"></i>
+                Contact
+            </a>
+        </div>
+
+    </div>
+    <div class="copy ta-center fc-white">
+        <small>&copy; CityDrive - Tous droits réservés 2025</small>
+    </div>
+</footer>
     <!-- FOOTER END -->
 
 </body>

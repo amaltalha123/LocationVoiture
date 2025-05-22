@@ -34,7 +34,7 @@
         }
 
         .logo {
-            color: #e78f38;
+            color: #324381;
             font-size: 30px;
             font-weight: bolder;
             transition: .3s;
@@ -60,12 +60,12 @@
         }
 
         nav ul li a:hover {
-            color: #e78f38;
-            border-bottom: 2px solid #e78f38;
+            color: #324381;
+            border-bottom: 2px solid #324381;
         }
 
         nav button {
-            background: #e78f38;
+            background: #324381;
             border: none;
             color: #fff;
             padding: 12px 35px;
@@ -87,19 +87,19 @@
 </head>
 <body>
     <nav>
-        <a href="#" class="logo">RENT-CAR</a>
+        <a href="#" class="logo">CityDrive</a>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Menu</a></li>
-            <li><a href="#">Reviews</a></li>
-            <li><a href="#">Blog</a></li>
+            <li><a href="{% url 'landing:index_page' %}">Accueil</a></li>
+            <li><a href="{% url 'landing:about_page' %}">À propos</a></li>
+            <li><a href="{% url 'landing:service_page' %}">Services</a></li>
+            <li><a href="{% url 'landing:contact_page' %}" >Contact </a></li>
+    
         </ul>
     </nav>
 
     <div class="login-container">
         <div class="logo">
-            <h1>CAR<span>RENTAL</span></h1>
+            <h1>City<span>Drive</span></h1>
         </div>
         <form method="post" class="login-form" action="{% url 'landing:login_view' %}">
             {% csrf_token %}

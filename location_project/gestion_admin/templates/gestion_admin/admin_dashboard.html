@@ -1,1 +1,74 @@
-hello admin admin
+<!DOCTYPE html>
+{% load static %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CityDrive Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-car"></i> CityDrive</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                        <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
+                    <li class="{% if request.resolver_match.url_name == 'vehicules' %}active{% endif %}">
+                        <a href="#"><i class="fas fa-car"></i> Véhicules</a>
+                    </li>
+                    <li class="{% if request.resolver_match.url_name == 'reservations' %}active{% endif %}">
+                        <a href="#"><i class="fas fa-calendar-check"></i> Réservations</a>
+                    </li>
+                    <li class="{% if request.resolver_match.url_name == 'clients' %}active{% endif %}">
+                        <a href="#"><i class="fas fa-users"></i> Clients</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <img src="#" alt="Profile">
+                    <div>
+                        <span class="user-name">{{ request.user.get_full_name }}</span>
+                        <span class="user-role">{{ request.user.groups.first }}</span>
+                    </div>
+                </div>
+                <a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                    <h1>{% block page_title %}Tableau de bord{% endblock %}</h1>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Rechercher...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                </div>
+            </header>
+
+            {% block content %}
+            <!-- Le contenu spécifique à chaque page ira ici -->
+            {% endblock %}
+        </main>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

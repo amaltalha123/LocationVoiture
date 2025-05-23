@@ -81,7 +81,7 @@ def modifier_voiture(request, voiture_id):
         voiture.matricule = request.POST['matricule']
         voiture.statut = request.POST['statut']
 
-        # 🔄 Récupérer automatiquement le manager à partir de l'utilisateur connecté
+        #  Récupérer automatiquement le manager à partir de l'utilisateur connecté
         try:
             manager = Manager.objects.get(email=request.user.email)
             voiture.manager = manager

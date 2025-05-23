@@ -52,6 +52,8 @@ def login_view(request):
             )
             if user is not None and user.role == form.cleaned_data['role']:
                 login(request, user)
+                if user.role == 'manager':
+                    request.session['manager_id'] = str(user.id)
                 return redirect('landing:deux')
             else:
                 messages.error(request, "Identifiants ou rôle incorrects.")

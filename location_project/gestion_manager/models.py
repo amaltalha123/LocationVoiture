@@ -1,5 +1,6 @@
-from mongoengine import Document, StringField, EmailField, ReferenceField, DateTimeField
+from mongoengine import Document, StringField, EmailField, IntField, FloatField, BooleanField, ReferenceField, DateTimeField
 from landing.models_nosql import Manager 
+
 
 
 class Client(Document):
@@ -15,9 +16,14 @@ class Client(Document):
 class Voiture(Document):
     marque = StringField(required=True)
     modele = StringField(required=True)
-    immatriculation = StringField(required=True, unique=True)
+    annee = IntField(required=True)
+    prix_jour = FloatField(required=True)
+    couleur = StringField()
+    matricule = StringField(required=True, unique=True)
+    image = StringField()  # chemin de l'image
     statut = StringField(choices=('disponible', 'indisponible'), default='disponible')
-    manager = ReferenceField(Manager)
+    manager = ReferenceField(Manager, required=False)
+
     meta = {'collection': 'voitures'}
 
 

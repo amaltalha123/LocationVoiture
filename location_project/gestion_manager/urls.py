@@ -6,6 +6,9 @@ urlpatterns = [
 
     #url pour voir la page des voitures 
     path('voir_voitures/', views.voir_voitures, name='voir_voitures'),
+    path('voitures/ajouter/', views.ajouter_voiture, name='ajouter_voiture'),
+    path('voitures/modifier/<str:voiture_id>/', views.modifier_voiture, name='modifier_voiture'),
+    path('voitures/supprimer/<str:voiture_id>/', views.supprimer_voiture, name='supprimer_voiture'),
 
     #url pour voir la liste des réservation
     path('reservations/', views.liste_reservations, name='liste_reservations'),

@@ -1,6 +1,5 @@
-from django.shortcuts import redirect, render
-from .models import Reservation
-from .models import Voiture
+from django.shortcuts import redirect, render,get_object_or_404
+from .models import Voiture,Client,Reservation
 from landing.models_nosql import Manager
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
@@ -12,6 +11,11 @@ from django.conf import settings
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from bson import ObjectId
+from datetime import datetime
+from mongoengine import DoesNotExist
+
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 @login_required
@@ -33,7 +37,20 @@ def voitures_manager(request):
 def voir_voitures(request):
     return render(request, 'Voir_Voitures.html')
 
+def dashboard_vehicule(request):
+    try:
+        # Trouver le manager MongoEngine lié à l'utilisateur Django connecté
+        manager = Manager.objects.get(username=request.user.username)
+        
+        # Récupérer les voitures liées à ce manager
+        voitures = Voiture.objects(manager=manager)
 
+        return render(request, 'Dashboard_vehicules.html', {'voitures': voitures})
+    
+    except Manager.DoesNotExist:
+        # Si aucun manager n'est trouvé : redirection ou erreur
+        return redirect('landing:login')  # Ou afficher un message d’erreur
+        
 @login_required
 def ajouter_voiture(request):
     if request.method == 'POST':
@@ -98,7 +115,7 @@ def modifier_voiture(request, voiture_id):
             voiture.image = image_path
 
         voiture.save()
-        return redirect('Voir_Voitures')
+        return redirect('dashboard_vehicule')
 
     return render(request, 'modifier_voiture.html', {'voiture': voiture})
 
@@ -115,7 +132,7 @@ def supprimer_voiture(request, voiture_id):
         return HttpResponseForbidden("Manager introuvable.")
 
     voiture.delete()
-    return redirect('Voir_Voitures')
+    return redirect('dashboard_vehicule')
 
 
 @login_required
@@ -139,5 +156,164 @@ def liste_reservations(request):
 def dashboard_Manager(request):
     return render(request, 'dashboard_Manager.html')
 
-def reservations_page(request):
-    return render(request, 'liste_reservations.html')
+
+#Gestion des resrvations
+def ajouter_reservation_template(request, voiture_id):
+    try:
+        voiture = Voiture.objects.get(id=voiture_id)
+    except DoesNotExist:
+        return render(request, '404.html') 
+    return render(request, 'Ajouter_Reservation.html', {'voiture': voiture})
+
+
+def ajouter_reservation(request, voiture_id):
+    try:
+        voiture = Voiture.objects.get(id=voiture_id)
+        manager = Manager.objects.get(username=request.user.username)
+    except DoesNotExist:
+        return render(request, '404.html') 
+
+   
+    if request.method == 'POST':
+        # Récupérer les données du formulaire
+        nom = request.POST.get('nom')
+        prenom = request.POST.get('prenom')
+        telephone = request.POST.get('telephone')
+        email = request.POST.get('email')
+        date_debut = request.POST.get('date_debut')
+        date_fin = request.POST.get('date_fin')
+        prix_total_str = request.POST.get('total_price')
+
+        # Vérifier que prix_total est fourni et peut être converti en float
+        if prix_total_str is None:
+            return render(request, 'Ajouter_Reservation.html', {
+                'voiture': voiture,
+                'error': "Le prix total doit être fourni."
+            })
+
+        try:
+            prix_total = float(prix_total_str)
+        except ValueError:
+            return render(request, 'Ajouter_Reservation.html', {
+                'voiture': voiture,
+                'error': "Le prix total doit être un nombre valide."
+            })
+
+        # Vérifier que les dates sont valides
+        if date_debut and date_fin:
+            date_debut = datetime.strptime(date_debut, '%Y-%m-%dT%H:%M')  # Format de datetime-local
+            date_fin = datetime.strptime(date_fin, '%Y-%m-%dT%H:%M')
+
+            if date_debut >= date_fin:
+                # Gérer l'erreur de date
+                return render(request, 'Ajouter_Reservation.html', {
+                    'voiture': voiture,
+                    'error': "La date de début doit être antérieure à la date de fin."
+                })
+
+            # Créer ou récupérer le client
+            try:
+                client = Client.objects.get(email=email)
+            except DoesNotExist:
+                client = Client(
+                    nom=nom,
+                    prenom=prenom,
+                    telephone=telephone,
+                    email=email
+                )
+                client.save()
+
+            # Créer la réservation
+            reservation = Reservation(
+                client=client,
+                voiture=voiture,
+                manager=manager,
+                date_debut=date_debut,
+                date_fin=date_fin,
+                statut='en attente',  # Statut par défaut
+                prix_total=prix_total
+            )
+            reservation.save()
+
+            # Envoyer un e-mail de confirmation
+            subject = 'Confirmation de votre réservation'
+            accept_link = request.build_absolute_uri(f'/accepter_reservation/{reservation.id}/')
+            refuse_link = request.build_absolute_uri(f'/refuser_reservation/{reservation.id}/')
+
+            message = f"""
+            Bonjour {client.prenom} {client.nom},
+
+            Votre réservation a été effectuée avec succès !
+
+            Détails de la réservation :
+            Voiture : {voiture.marque} {voiture.modele}
+            Date de début : {date_debut.strftime('%Y-%m-%d %H:%M')}
+            Date de fin : {date_fin.strftime('%Y-%m-%d %H:%M')}
+            Statut : {reservation.statut}
+            Total à payer: {reservation.prix_total}
+            Pour confirmer votre réservation, cliquez sur le lien suivant :
+            [Accepter la réservation]({accept_link})
+
+            Si vous souhaitez refuser la réservation, cliquez sur le lien suivant :
+            [Refuser la réservation]({refuse_link})
+
+            Merci de votre confiance !
+
+            Cordialement,
+            L'équipe CityDrive
+            """
+            send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
+
+            # Rediriger ou afficher un message de succès
+            voitures = Voiture.objects(manager=manager)
+            return render(request, 'Dashboard_Vehicules.html', {'voitures':voitures,'success': "Votre réservation a été effectuée avec succès."})
+
+    return render(request, 'Ajouter_Reservation.html', {'voiture': voiture})
+
+
+
+from mongoengine import DoesNotExist
+
+from datetime import datetime
+from mongoengine import DoesNotExist
+
+def accepter_reservation(request, reservation_id):
+    try:
+        reservation = Reservation.objects.get(id=reservation_id)
+        
+        # Vérifier si la réservation a déjà été acceptée ou refusée
+        if reservation.statut in ['acceptée', 'refusée']:
+            return render(request, 'confirmation.html', {'message': "Cette réservation a déjà été traitée."})
+
+        # Vérifier si la date de début est déjà atteinte
+        if reservation.date_debut <= datetime.now():
+            return render(request, 'confirmation.html', {'message': "Vous ne pouvez pas accepter cette réservation car la date de début est déjà atteinte."})
+
+        # Mettre à jour le statut de la réservation
+        reservation.statut = 'acceptée'
+        reservation.save()
+        return render(request, 'confirmation.html', {'message': "Votre réservation a été confirmée."})
+    
+    except DoesNotExist:
+        return render(request, '404.html')  # Assurez-vous que ce template existe
+
+
+def refuser_reservation(request, reservation_id):
+    try:
+        reservation = Reservation.objects.get(id=reservation_id)
+        
+        # Vérifier si la réservation a déjà été acceptée ou refusée
+        if reservation.statut in ['acceptée', 'refusée']:
+            return render(request, 'confirmation.html', {'message': "Cette réservation a déjà été traitée."})
+
+        # Vérifier si la date de début est déjà atteinte
+        if reservation.date_debut <= datetime.now():
+            return render(request, 'confirmation.html', {'message': "Vous ne pouvez pas refuser cette réservation car la date de début est déjà atteinte."})
+
+        # Mettre à jour le statut de la réservation
+        reservation.statut = 'refusée'
+        reservation.save()
+        return render(request, 'confirmation.html', {'message': "Votre réservation a été refusée."})
+    
+    except DoesNotExist:
+        return render(request, '404.html')

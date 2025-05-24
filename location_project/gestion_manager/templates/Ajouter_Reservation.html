@@ -1,100 +1,353 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Ajouter un Manager</title>
-  <link href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-size: cover;
-      width: 100vw;
-      height: 100vh;
-      display: grid;
-      align-items: center;
-      justify-items: center;
-      font-family: 'Fjalla One', sans-serif;
-    }
-
-    .contact-us {
-      background: #d2e7e9;
-      padding: 50px 100px;
-      border: 2px solid rgba(0, 0, 0, 1);
-      box-shadow: 15px 15px 1px #327c83, 15px 15px 1px 2px rgba(0, 0, 0, 1);
-    }
-
-    .contact-us h2 {
-      margin-bottom: 20px;
-      text-align: center;
-      color: #2A293E;
-    }
-
-    form input {
-      display: block;
-      width: 100%;
-      font-size: 14pt;
-      line-height: 28pt;
-      margin-bottom: 28pt;
-      border: none;
-      border-bottom: 5px solid rgba(0,0,0,1);
-      background: #d2e7e9;
-      min-width: 250px;
-      padding-left: 5px;
-      outline: none;
-      color: rgba(0,0,0,1);
-    }
-
-    form input:focus {
-      border-bottom: 5px solid #327c83;
-    }
-
-    button {
-      display: block;
-      margin: 0 auto;
-      line-height: 28pt;
-      padding: 0 20px;
-      background: #327c83;
-      letter-spacing: 2px;
-      transition: .2s all ease-in-out;
-      outline: none;
-      border: 1px solid rgba(0, 0, 0, 1);
-      box-shadow: 3px 3px 1px 1px #80cad0, 3px 3px 1px 2px rgba(0,0,0,1);
-      font-size: 14pt;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #327c83;
-      color: white;
-      border: 1px solid rgba(0,0,0,1);
-    }
-
-    ::selection {
-      background: #327c83;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation - CityDrive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <style>
+        /* Styles spécifiques à la page de réservation */
+        .reservation-container {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .car-details {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .car-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .car-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .car-specs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .spec-icon {
+            color: #3498db;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .car-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 1rem 0;
+        }
+        
+        .reservation-form {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .form-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #34495e;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .submit-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .date-inputs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .price-summary {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border: 1px solid #e9ecef;
+        }
+        
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .total-price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #27ae60;
+            border-top: 1px solid #dee2e6;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .reservation-container {
+                flex-direction: column;
+            }
+            
+            .date-inputs {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="contact-us">
-    <h2>Ajouter un Manager</h2>
-    <form method="post">
-      <h1>hello again</h1>
-      {% csrf_token %}
-      <input type="text" name="nom" placeholder="Nom" value="{{ manager.nom|default_if_none:'' }}" required>
-      <input type="text" name="prenom" placeholder="Prénom" value="{{ manager.prenom|default_if_none:'' }}" required>
-      <input type="email" name="email" placeholder="Email" value="{{ manager.email|default_if_none:'' }}" required>
-      <input type="text" name="telephone" placeholder="Téléphone" value="{{ manager.telephone|default_if_none:'' }}">
-      <input type="text" name="agence" placeholder="Agence" value="{{ manager.agence|default_if_none:'' }}">
-      <button type="submit">ENREGISTRER</button>
-    </form>
-  </div>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-car"></i> CityDrive</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                        <a href="{% url 'gestion_manager:dashboard_Manager' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
+                    <li class="{% if request.resolver_match.url_name == 'vehicules' %}active{% endif %}">
+                        <a href="{% url 'gestion_manager:dashboard_vehicule' %}"><i class="fas fa-car"></i> Véhicules</a>
+                    </li>
+                    <li class="{% if request.resolver_match.url_name == 'vehicules' %}active{% endif %}">
+                        <a href="{% url 'gestion_manager:ajouter_voiture' %}"><i class="fas fa-car"></i> Ajouter Voiture</a>
+                    </li>
+                    <li class="{% if request.resolver_match.url_name == 'reservations' %}active{% endif %}">
+                        <a href="#"><i class="fas fa-calendar-check"></i> Réservations</a>
+                    </li>
+                    <li class="{% if request.resolver_match.url_name == 'clients' %}active{% endif %}">
+                        <a href="#"><i class="fas fa-users"></i> Clients</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <img src="#" alt="Profile">
+                    <div>
+                        <span class="user-name">{{ request.user.get_full_name }}</span>
+                        <span class="user-role">{{ request.user.groups.first }}</span>
+                    </div>
+                </div>
+                <a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                    <h1>Réserver un véhicule</h1>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Rechercher...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="reservation-container">
+                <!-- Section détails de la voiture -->
+                <div class="car-details">
+                    <img src="/media/{{ voiture.image }}" alt="{{ voiture.marque }} {{ voiture.modele }}" class="car-image">
+                    <h2 class="car-title">{{ voiture.marque }} {{ voiture.modele }}</h2>
+                    <p class="car-price" id="voiture.prix_jour">{{ voiture.prix_jour }} €/jour</p>
+                    
+                    <div class="car-specs">
+                        <div class="spec-item">
+                            <span class="spec-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span>Année: {{ voiture.annee }}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulaire de réservation -->
+                <div class="reservation-form">
+                    <h2 class="form-title">Formulaire de réservation</h2>
+                    
+                    <form method="POST" action="{% url 'gestion_manager:ajouter_reservation' voiture.id %}">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="nom">Nom du client:</label>
+                            <input type="text" name="nom" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="prenom">Prénom du client:</label>
+                            <input type="text" name="prenom" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email du client:</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telephone">Téléphone du client:</label>
+                            <input type="tel" name="telephone" class="form-control">
+                        </div>
+                        
+                        <div class="date-inputs">
+                            <div class="form-group">
+                                <label for="date_debut">Date de début:</label>
+                                <input type="datetime-local" name="date_debut" class="form-control" required id="date_debut">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="date_fin">Date de fin:</label>
+                                <input type="datetime-local" name="date_fin" class="form-control" required id="date_fin">
+                            </div>
+                        </div>
+                        
+                        <!-- Section de résumé du prix -->
+                        <div class="price-summary">
+                            <div class="price-item">
+                                <span>Prix par jour:</span>
+                                <span id="daily-price">{{ voiture.prix_jour }} €</span>
+                            </div>
+                            <div class="price-item">
+                                <span>Durée:</span>
+                                <span id="duration">0 jours</span>
+                            </div>
+                            <div class="price-item total-price">
+                                <span>Total:</span>
+                                <span id="total-price">0 €</span>
+                            </div>
+                        </div>
+                        <input type="hidden" name="total_price" id="total-price-input" value="0">
+    
+    
+                        <button type="submit" class="submit-btn">Confirmer la réservation</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    const pricePerDay = parseFloat(document.getElementById('voiture.prix_jour').textContent);
+    const startDateInput = document.getElementById('date_debut');
+    const endDateInput = document.getElementById('date_fin');
+    const durationDisplay = document.getElementById('duration');
+    const totalPriceDisplay = document.getElementById('total-price');
+    const totalPriceInput = document.getElementById('total-price-input'); // Nouvelle ligne
+    
+    function calculateTotal() {
+        if (startDateInput.value && endDateInput.value) {
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+            
+            if (endDate <= startDate) {
+                durationDisplay.textContent = "Dates invalides";
+                totalPriceDisplay.textContent = "0 €";
+                totalPriceInput.value = "0"; // Mise à jour du champ hidden
+                return;
+            }
+            
+            const diffTime = Math.abs(endDate - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+            const totalPrice = diffDays * pricePerDay;
+            
+            durationDisplay.textContent = diffDays + " jour" + (diffDays > 1 ? "s" : "");
+            totalPriceDisplay.textContent = totalPrice.toFixed(2) + " €";
+            totalPriceInput.value = totalPrice.toFixed(2); // Mise à jour du champ hidden
+        } else {
+            durationDisplay.textContent = "0 jours";
+            totalPriceDisplay.textContent = "0 €";
+            totalPriceInput.value = "0"; // Mise à jour du champ hidden
+        }
+    }
+    
+    startDateInput.addEventListener('change', calculateTotal);
+    endDateInput.addEventListener('change', calculateTotal);
+    
+    calculateTotal();
+});
+    </script>
 </body>
 </html>

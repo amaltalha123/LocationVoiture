@@ -34,6 +34,7 @@ class Reservation(Document):
     manager = ReferenceField(Manager, required=False)
     date_debut = DateTimeField(required=True)
     date_fin = DateTimeField(required=True)
-    statut = StringField(choices=('en attente', 'acceptée', 'refusée'), default='en attente')
+    statut = StringField(choices=('en attente', 'acceptée', 'refusée','confirmée','rejetée'), default='en attente')
+    prix_total=FloatField(required=True)
 
     meta = {'collection': 'reservations'}

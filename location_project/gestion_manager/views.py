@@ -56,39 +56,59 @@ def ajouter_voiture(request):
     if request.method == 'POST':
         marque = request.POST.get('marque')
         modele = request.POST.get('modele')
+        annee = int(request.POST['annee'])
+        prix_jour = float(request.POST['prix_jour'])
+        couleur = request.POST.get('couleur', '')
+        matricule = request.POST['matricule']
+        statut = request.POST['statut']
         image_file = request.FILES.get('image')
+
+        # 🔽 Nouveaux champs
+        nbr_places = int(request.POST.get('nbr_places', 0))
+        nbr_portes = int(request.POST.get('nbr_portes', 0))
+        carburant = request.POST.get('carburant', '')
+        boite_vitesse = request.POST.get('boite_vitesse', '')
+        kilometrage = int(request.POST.get('kilometrage', 0))
+        description = request.POST.get('description', '')
 
         image_path = None
         if image_file:
             path = default_storage.save(f'voitures/{image_file.name}', ContentFile(image_file.read()))
             image_path = path
 
-        # Trouver le manager MongoDB lié à l'utilisateur connecté
         try:
             manager = Manager.objects.get(email=request.user.email)
         except Manager.DoesNotExist:
             manager = None
 
-        # Enregistrer la voiture avec le manager MongoDB
         Voiture(
             marque=marque,
             modele=modele,
-            annee=int(request.POST['annee']),
-            prix_jour=float(request.POST['prix_jour']),
-            couleur=request.POST.get('couleur', ''),
-            matricule=request.POST['matricule'],
+            annee=annee,
+            prix_jour=prix_jour,
+            couleur=couleur,
+            matricule=matricule,
+            statut=statut,
             image=image_path,
-            statut=request.POST['statut'],
-            manager=manager
+            manager=manager,
+
+            # 🔽 Ajout des champs personnalisés
+            nbr_places=nbr_places,
+            nbr_portes=nbr_portes,
+            carburant=carburant,
+            boite_vitesse=boite_vitesse,
+            kilometrage=kilometrage,
+            description=description
         ).save()
 
-        return redirect('gestion_manager:dashboard_Manager')
+        return redirect('gestion_manager:dashboard_vehicule')
 
     return render(request, 'ajouter_voiture.html')
 
+
 def modifier_voiture(request, voiture_id):
     voiture = Voiture.objects.get(id=voiture_id)
-    
+
     if request.method == 'POST':
         voiture.marque = request.POST['marque']
         voiture.modele = request.POST['modele']
@@ -98,7 +118,14 @@ def modifier_voiture(request, voiture_id):
         voiture.matricule = request.POST['matricule']
         voiture.statut = request.POST['statut']
 
-        #  Récupérer automatiquement le manager à partir de l'utilisateur connecté
+        # 🔽 Champs supplémentaires
+        voiture.nbr_places = int(request.POST['nbr_places'])
+        voiture.nbr_portes = int(request.POST['nbr_portes'])
+        voiture.carburant = request.POST['carburant']
+        voiture.boite_vitesse = request.POST['boite_vitesse']
+        voiture.kilometrage = int(request.POST['kilometrage'])
+        voiture.description = request.POST.get('description', '')
+
         try:
             manager = Manager.objects.get(email=request.user.email)
             voiture.manager = manager
@@ -107,18 +134,13 @@ def modifier_voiture(request, voiture_id):
 
         image_file = request.FILES.get('image')
         if image_file:
-            image_path = f"voitures/{image_file.name}"
-            full_path = os.path.join(settings.MEDIA_ROOT, image_path)
-            with open(full_path, 'wb+') as f:
-                for chunk in image_file.chunks():
-                    f.write(chunk)
-            voiture.image = image_path
+            path = default_storage.save(f'voitures/{image_file.name}', ContentFile(image_file.read()))
+            voiture.image = path
 
         voiture.save()
-        return redirect('dashboard_vehicule')
+        return redirect('gestion_manager:dashboard_vehicule')
 
     return render(request, 'modifier_voiture.html', {'voiture': voiture})
-
 
 def supprimer_voiture(request, voiture_id):
     voiture = Voiture.objects.get(id=voiture_id)
@@ -132,7 +154,7 @@ def supprimer_voiture(request, voiture_id):
         return HttpResponseForbidden("Manager introuvable.")
 
     voiture.delete()
-    return redirect('dashboard_vehicule')
+    return redirect('gestion_manager:dashboard_vehicule')
 
 
 @login_required

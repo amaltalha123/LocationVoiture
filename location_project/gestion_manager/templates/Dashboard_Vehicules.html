@@ -148,15 +148,13 @@ a {
                 </ul>
             </nav>
             <div class="sidebar-footer">
-                <div class="user-profile">
-                    <img src="#" alt="Profile">
-                    <div>
-                        <span class="user-name">{{ request.user.get_full_name }}</span>
-                        <span class="user-role">{{ request.user.groups.first }}</span>
-                    </div>
-                </div>
-                <a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i></a>
-            </div>
+                <form method="post" action="{% url 'gestion_manager:logout' %}" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="logout-btn" title="Déconnexion" style="background: none; border: none; cursor: pointer; color: inherit; display: flex; align-items: center; gap: 5px;">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+    </button>
+</form>
+ </div>
         </aside>
 
         <!-- Main Content Area -->

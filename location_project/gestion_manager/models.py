@@ -23,6 +23,12 @@ class Voiture(Document):
     image = StringField()  # chemin de l'image
     statut = StringField(choices=('disponible', 'indisponible'), default='disponible')
     manager = ReferenceField(Manager, required=False)
+    description = StringField()
+    nbr_places = IntField()
+    boite_vitesse = StringField(choices=['manuelle', 'automatique'])
+    nbr_portes = IntField()
+    carburant = StringField(choices=['essence', 'diesel', 'électrique'])
+    kilometrage = IntField()
 
     meta = {'collection': 'voitures'}
 

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LogoutView
 
 app_name = 'gestion_manager'
 urlpatterns = [
@@ -26,5 +27,7 @@ urlpatterns = [
     path('ajouter_reservation/<str:voiture_id>/', views.ajouter_reservation, name='ajouter_reservation'),
     path('ajouter_reservation_template/<str:voiture_id>/', views.ajouter_reservation_template, name='ajouter_reservation_template'),
     path('accepter_reservation/<str:reservation_id>/', views.accepter_reservation, name='accepter_reservation'),
-    path('refuser_reservation/<str:reservation_id>/', views.refuser_reservation, name='refuser_reservation')
+    path('refuser_reservation/<str:reservation_id>/', views.refuser_reservation, name='refuser_reservation'),
+    path('logout/', LogoutView.as_view(next_page='/accounts/login/'), name='logout'),
+
 ]

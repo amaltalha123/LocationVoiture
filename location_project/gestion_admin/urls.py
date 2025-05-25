@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LogoutView
 
 
 app_name = 'gestion_admin'
@@ -13,5 +14,7 @@ urlpatterns = [
     path('registerManager/', views.register_user, name='register_user'),
     path('addManager/', views.add_manager, name='add_manager'),
 
-    path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard')
+    path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('logout/', LogoutView.as_view(next_page='/accounts/login/'), name='logout'),
+
 ]

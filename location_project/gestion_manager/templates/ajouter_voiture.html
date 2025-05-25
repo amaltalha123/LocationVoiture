@@ -80,7 +80,50 @@
                     <input type="file" name="image" id="image-upload" accept="image/*">
                 </div>
             </div>
+            <div class="form-row">
+    <div class="form-group">
+        <label>Nombre de places</label>
+        <input name="nbr_places" type="number" placeholder="Ex: 5" required class="form-input">
+    </div>
+    <div class="form-group">
+        <label>Nombre de portes</label>
+        <input name="nbr_portes" type="number" placeholder="Ex: 4" required class="form-input">
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group">
+        <label>Type de carburant</label>
+        <select name="carburant" required class="form-select">
+            <option value="" disabled selected>Choisir un type</option>
+            <option value="essence">Essence</option>
+            <option value="diesel">Diesel</option>
+            <option value="electrique">Électrique</option>
             
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Boîte de vitesses</label>
+        <select name="boite_vitesse" required class="form-select">
+            <option value="" disabled selected>Choisir un type</option>
+            <option value="automatique">Automatique</option>
+            <option value="manuelle">Manuelle</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group">
+        <label>Kilométrage (km)</label>
+        <input name="kilometrage" type="number" placeholder="Ex: 30000" required class="form-input">
+    </div>
+</div>
+
+<div class="form-group">
+    <label>Description</label>
+    <textarea name="description" rows="4" placeholder="Décrivez la voiture..." class="form-input" style="resize: vertical;"></textarea>
+</div>
+
             <div class="form-actions">
                 <button type="submit" class="submit-btn">
                     <i class="fas fa-plus-circle"></i> Ajouter la Voiture
@@ -94,6 +137,11 @@
 </div>
 
 <style>
+    .textarea.form-input {
+    font-family: inherit;
+    resize: vertical;
+    }
+
     .content-wrapper {
         padding: 20px;
         background: #f5f7fa;

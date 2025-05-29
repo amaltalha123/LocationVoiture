@@ -108,7 +108,7 @@
       <div class="table-users">
          <div class="header">Managers</div>
 
-         <a href="{% url 'ajouter_manager' %}" class="add-btn">+ Ajouter un Manager</a>
+<a href="{% url 'gestion_admin:ajouter_manager' %}">Ajouter Manager</a>
 
          <table>
             <thead>
@@ -130,8 +130,8 @@
                   <td>{{ manager.telephone }}</td>
                   <td>{{ manager.agence }}</td>
                   <td class="actions">
-                     <a href="{% url 'modifier_manager' manager.id %}">Modifier</a>
-                     <a href="{% url 'supprimer_manager' manager.id %}">Supprimer</a>
+<a href="{% url 'gestion_admin:modifier_manager' manager_id=manager.id %}">Modifier</a>
+<a href="{% url 'gestion_admin:supprimer_manager' manager.id %}">Supprimer</a>
                   </td>
                </tr>
                {% empty %}

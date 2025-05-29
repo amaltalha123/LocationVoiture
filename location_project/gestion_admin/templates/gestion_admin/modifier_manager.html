@@ -86,14 +86,23 @@
   <div class="contact-us">
     <h2>Modifier un Manager</h2>
     <form method="post">
-      {% csrf_token %}
-      <input type="text" name="nom" placeholder="Nom" value="{{ manager.nom|default_if_none:'' }}" required>
-      <input type="text" name="prenom" placeholder="Prénom" value="{{ manager.prenom|default_if_none:'' }}" required>
-      <input type="email" name="email" placeholder="Email" value="{{ manager.email|default_if_none:'' }}" required>
-      <input type="text" name="telephone" placeholder="Téléphone" value="{{ manager.telephone|default_if_none:'' }}">
-      <input type="text" name="agence" placeholder="Agence" value="{{ manager.agence|default_if_none:'' }}">
-      <button type="submit">MODIFIER</button>
-    </form>
+  {% csrf_token %}
+  
+  {% if error %}
+    <p style="color:red;">{{ error }}</p>
+  {% endif %}
+
+  <input type="text" name="nom" placeholder="Nom" value="{{ manager.nom|default_if_none:'' }}" required>
+  <input type="text" name="prenom" placeholder="Prénom" value="{{ manager.prenom|default_if_none:'' }}" required>
+  <input type="email" name="email" placeholder="Email" value="{{ manager.email|default_if_none:'' }}" required>
+  <input type="text" name="telephone" placeholder="Téléphone" value="{{ manager.telephone|default_if_none:'' }}">
+  <input type="text" name="agence" placeholder="Agence" value="{{ manager.agence|default_if_none:'' }}">
+  <input type="password" name="password" placeholder="Nouveau mot de passe (laisser vide si inchangé)">
+  
+  <button type="submit">MODIFIER</button>
+  <a href="{% url 'gestion_admin:liste_managers' %}">Annuler</a>
+</form>
+
   </div>
 </body>
 </html>

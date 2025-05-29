@@ -20,14 +20,15 @@
                     <li class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
                         <a href="{% url 'gestion_manager:dashboard_Manager' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                     </li>
-                    <li class="{% if request.resolver_match.url_name == 'vehicules' %}active{% endif %}">
-                        <a href="{% url 'gestion_manager:dashboard_vehicule' %}"><i class="fas fa-car"></i> Voitures</a>
-                    </li>
-                    <li class="{% if request.resolver_match.url_name == 'vehicules' %}active{% endif %}">
-                        <a href="{% url 'gestion_manager:ajouter_voiture' %}"><i class="fas fa-car"></i> Ajouter une Voiture</a>
-                    </li>
+                   <li class="{% if request.resolver_match.url_name == 'dashboard_vehicule' %}active{% endif %}">
+    <a href="{% url 'gestion_manager:dashboard_vehicule' %}"><i class="fas fa-car"></i> Voitures</a>
+</li>
+<li class="{% if request.resolver_match.url_name == 'ajouter_voiture' %}active{% endif %}">
+    <a href="{% url 'gestion_manager:ajouter_voiture' %}"><i class="fas fa-car"></i> Ajouter une Voiture</a>
+</li>
+
                     <li class="{% if request.resolver_match.url_name == 'reservations' %}active{% endif %}">
-                        <a href="#"><i class="fas fa-calendar-check"></i> Réservations</a>
+<a href="{% url 'gestion_manager:liste_reservations' %}">Réservations</a>
                     </li>
                     
                     <li class="{% if request.resolver_match.url_name == 'clients' %}active{% endif %}">

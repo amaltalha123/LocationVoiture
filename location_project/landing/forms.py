@@ -5,13 +5,10 @@ from .models import CustomUser
 class CustomLoginForm(forms.Form):
     username = forms.CharField(label="Nom d'utilisateur")
     password = forms.CharField(widget=forms.PasswordInput, label="Mot de passe")
-    role = forms.ChoiceField(
-        choices=[('admin', 'Admin'), ('manager', 'Manager')],
-        label="Rôle"
-    )
+    role = forms.ChoiceField(choices=[('Admin', 'Admin'), ('Manager', 'Manager')])
 
 class CustomUserCreationForm(UserCreationForm):
-    role = forms.ChoiceField(choices=[('admin', 'Admin'), ('manager', 'Manager')])
+    role = forms.ChoiceField(choices=[('Admin', 'Admin'), ('Manager', 'Manager')])
 
     class Meta:
         model = CustomUser
